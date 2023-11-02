@@ -11,9 +11,9 @@ import (
 	amqp "github.com/rabbitmq/amqp091-go"
 )
 
-var service = "10.43.253.76"
-var username = "default_user_CE8vPLJdizCSBv4CIGx"
-var password = "XDdrNzMWsNoDPbkB6fTaxI7n0sktqxxW"
+var service = "10.43.186.178"
+var username = "admin"
+var password = "password"
 
 func failOnError(err error, msg string) {
 	if err != nil {

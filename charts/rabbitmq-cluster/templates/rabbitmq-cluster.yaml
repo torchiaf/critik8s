@@ -5,20 +5,20 @@ metadata:
   labels:
   {{- include "rabbitmq-cluster.labels" . | nindent 4 }}
 spec:
-  replicas: 3
+  replicas: {{ .Values.cluster.replicas }}
   resources:
     requests:
-      cpu: 500m
-      memory: 1Gi
+      cpu: {{ .Values.cluster.resources.cpu }}
+      memory: {{ .Values.cluster.resources.memory }}
     limits:
-      cpu: 1
-      memory: 2Gi
+      cpu: {{ .Values.cluster.resources.cpu }}
+      memory: {{ .Values.cluster.resources.memory }}
   rabbitmq:
-          additionalConfig: |
-                  log.console.level = info
-                  channel_max = 700
-                  default_user= guest 
-                  default_pass = guest
-                  default_user_tags.administrator = true
+    additionalConfig: |
+      log.console.level = {{ .Values.rabbitmq.config.logLevel }}
+      channel_max = 700
+      default_user= {{ .Values.rabbitmq.config.username }} 
+      default_pass = {{ .Values.rabbitmq.config.password }}
+      default_user_tags.administrator = true
   service:
     type: LoadBalancer
