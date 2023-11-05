@@ -2,7 +2,7 @@
 replicaCount: 1
 
 image:
-  repository: emit-image
+  repository: ghcr.io/torchiaf/critik8s/emit-image
   pullPolicy: IfNotPresent
   tag: "latest"
 
@@ -59,7 +59,7 @@ ingress:
 
 configmap:
   rmq_queue: "pippo"
-  rmq_service: "10.43.186.178"
+  rmq_service: "10.43.159.133"
   rmq_port: "5672"
   rmq_username: "admin"
   rmq_password: "password"
