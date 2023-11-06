@@ -4,19 +4,14 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"net"
+	"net/url"
 	"os"
 	"strings"
 	"time"
 
 	amqp "github.com/rabbitmq/amqp091-go"
 )
-
-var service = os.Getenv("rmq_service")
-var port = os.Getenv("rmq_port")
-var username = os.Getenv("rmq_username")
-var password = os.Getenv("rmq_password")
-
-var queue = os.Getenv("rmq_queue")
 
 func failOnError(err error, msg string) {
 	if err != nil {
@@ -25,6 +20,19 @@ func failOnError(err error, msg string) {
 }
 
 func main() {
+
+	service := os.Getenv("RABBITMQ_CLUSTER_SERVICE_HOST")
+
+	u, err := url.Parse(os.Getenv("RABBITMQ_CLUSTER_PORT"))
+	if err != nil {
+		panic(err)
+	}
+	_, port, _ := net.SplitHostPort(u.Host)
+
+	username := os.Getenv("rmq_username")
+	password := os.Getenv("rmq_password")
+	routingKey := os.Getenv("rmq_routing_key")
+
 	address := fmt.Sprintf("amqp://%s:%s@%s:%s/", username, password, service, port)
 
 	conn, err := amqp.Dial(address)
@@ -54,7 +62,7 @@ func main() {
 	for {
 		err = ch.PublishWithContext(ctx,
 			"logs_topic", // exchange
-			queue,        // routing key
+			routingKey,   // routing key
 			false,        // mandatory
 			false,        // immediate
 			amqp.Publishing{
