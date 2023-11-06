@@ -26,15 +26,10 @@ podSecurityContext: {}
 securityContext: {}
 
 # capabilities
-
 #   drop
-
 #   - ALL
-
 # readOnlyRootFilesystem: true
-
 # runAsNonRoot: true
-
 # runAsUser: 1000
 
 service:
@@ -52,30 +47,17 @@ ingress:
   tls: []
 
 #  - secretName: example-tls
-
 #    hosts
-
 #      - emit.local
 
-configmap:
-  rmq_queue: "pippo"
-  rmq_service: "10.43.159.133"
-  rmq_port: "5672"
-  rmq_username: "admin"
-  rmq_password: "password"
 
 resources: {}
 
 # limits
-
 #   cpu: 100m
-
 #   memory: 128Mi
-
 # requests
-
 #   cpu: 100m
-
 #   memory: 128Mi
 
 autoscaling:

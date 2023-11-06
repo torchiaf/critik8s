@@ -15,7 +15,7 @@ This chart will install the RabbitMq operator to deploy and manage RabbitMQ clus
 This chart will install the RabbitMq Custer, which provides the messaging services inside your cluster.
 
   ```bash
-  helm install rabbitmq-cluster charts/rabbitmq-cluster/ -n rabbitmq --create-namespace
+  helm install rabbitmq-cluster charts/rabbitmq-cluster/ --values settings.yaml -n rabbitmq --create-namespace
   ```
 
 ## Test RabbitMq Cluster

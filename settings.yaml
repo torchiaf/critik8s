@@ -1,0 +1,5 @@
+settings:
+  rabbitmq:
+    routingKey: pippo
+    username: admin
+    password: password
