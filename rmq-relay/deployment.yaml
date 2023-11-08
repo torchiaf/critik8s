@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: rmq-relay
+  name: rmq-relay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rmq-relay
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: rmq-relay
+    spec:
+      containers:
+      - image: cloudamqp/websocket-tcp-relay
+        name: rmq-relay
+        resources: {}
+        args: [ "--upstream", "tcp://$(RABBITMQ_CLUSTER_SERVICE_HOST):$(RABBITMQ_CLUSTER_SERVICE_PORT)" ]
+status: {}

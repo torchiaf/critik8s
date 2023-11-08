@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rmq-relay
+  labels:
+    app: rmq-relay
+spec:
+  type: ClusterIP
+  ports:
+  - port: 15670
+    protocol: TCP
+    targetPort: 15670
+  selector:
+    app: rmq-relay
