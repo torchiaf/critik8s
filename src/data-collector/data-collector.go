@@ -19,14 +19,16 @@ func failOnError(err error, msg string) {
 
 func main() {
 
-	service := os.Getenv("RABBITMQ_CLUSTER_SERVICE_HOST")
-	port := os.Getenv("RABBITMQ_CLUSTER_SERVICE_PORT")
+	service := "192.168.16.2"
+	// port := os.Getenv("RABBITMQ_CLUSTER_SERVICE_PORT")
 
-	username := os.Getenv("RMQ_USERNAME")
-	password := os.Getenv("RMQ_PASSWORD")
-	monitorRoutingKey := os.Getenv("ROUTE_1")
+	username := "admin"
+	password := "password"
+	monitorRoutingKey := "vDsJNl"
 
-	address := fmt.Sprintf("amqp://%s:%s@%s:%s/", username, password, service, port)
+	address := fmt.Sprintf("amqp://%s:%s@%s", username, password, service)
+
+	kubeconfig()
 
 	conn, err := amqp.Dial(address)
 	failOnError(err, "Failed to connect to RabbitMQ")

@@ -7,6 +7,8 @@
     "lint:md": "markdownlint-cli2 --fix **/*.md",
     "generate:models": "echo generate models and API interface",
     "cluster:create": "k3d cluster create critik8s -p '80:80@loadbalancer'",
+    "cluster:create:s3": "k3d cluster create critik8s -p '80:80@loadbalancer' --servers 3",
+    "cluster:create:a3": "k3d cluster create critik8s -p '80:80@loadbalancer' -a 2",
     "cluster:delete": "k3d cluster delete critik8s",
     "critik8s:create:ns": "kubectl create ns critik8s",
     "rabbitmq:install": "helm install rabbitmq-operator charts/rabbitmq-operator -n critik8s && helm install rabbitmq-cluster charts/rabbitmq-cluster --values settings.yaml -n critik8s",
