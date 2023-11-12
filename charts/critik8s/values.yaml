@@ -1,9 +1,6 @@
 kubernetesClusterDomain: cluster.local
 amqpProxy:
   amqpProxy:
-    args:
-    - --upstream
-    - tcp://$(RABBITMQ_CLUSTER_SERVICE_HOST):$(RABBITMQ_CLUSTER_SERVICE_PORT)
     image:
       repository: cloudamqp/websocket-tcp-relay
       tag: latest
@@ -13,10 +10,13 @@ amqpProxy:
     targetPort: 15670
   replicas: 1
   type: ClusterIP
+  externalService:
+    host: critik8s-amqp
+    externalName: "rabbitmq-cluster.rabbitmq.svc.cluster.local"
 dataCollector:
   replicaCount: 1
   image:
-    repository: ghcr.io/open-tomorrow/critik8s/data-collector
+    repository: ghcr.io/torchiaf/critik8s/data-collector
     pullPolicy: Always
     tag: "latest"
   imagePullSecrets: []
@@ -68,7 +68,7 @@ monitorBackend:
     env:
       port: "8081"
     image:
-      repository: ghcr.io/open-tomorrow/critik8s/monitor-backend
+      repository: ghcr.io/torchiaf/critik8s/monitor-backend
       tag: latest
   ports:
   - port: 8081
